@@ -3,12 +3,29 @@ using std::endl;
 using std::cin;
 using std::cout;
 void diamond(int radius);
+
+int getInt(int userInput);
+
+void bottomHalf(int radius);
+
+void topHalf(int radius);
+
 int main() {
     while(true) {
-        std::cout << "No";
         int userInput;
         //Loops until the user gives a valid input
-        while (true) {
+        userInput = getInt(userInput);
+        if(userInput == 0) {
+            break;
+        }else {
+            diamond(userInput);
+        }
+    }
+    return 0;
+}
+
+int getInt(int userInput) {
+    while (true) {
 
             cout << "Enter a positive number for the diamond to be in the dimensions of. Enter 0 to end the program" << endl;
             cin >> userInput;
@@ -18,46 +35,31 @@ int main() {
             else
                 cout << "Please enter a positive number \n" << endl;
         }
-        if(userInput == 0) {
-            break;
-        }else {
-            diamond(userInput);
-        }
-    }
-    return 0;
+    return userInput;
 }
+
 void diamond(int radius){
 
     //account for center dot
     radius -= 1;
 
     //Print top half of diamond
-    //Make a row
-    for(int i = 0; i < radius; ++i){
-
-        //fill the row
-        for(int c = 0; c < radius * 2 + 1; c++){
-
-            //Test to see if the place in the for loop needs a character; uses the radius as a mid point and then adds/subtracts the row to find the range
-
-            if(c == radius || (c <= radius +i && c >= radius - i)){
-                cout << "#";
-            }else{
-                cout << " ";
-            }
-        }
-        cout << endl;
-    }
+    topHalf(radius);
 
     //Print bottom half of diamond
-    //Make a row
-    for(int i = radius; i >= 0; i--){
+    bottomHalf(radius);
+
+}
+
+void topHalf(int radius) {//Make a row
+    for(int row = 0; row < radius; ++row){
+
         //fill the row
-        for(int c = 0; c < radius * 2 +1; c++){
+        for(int col = 0; col < radius * 2 + 1; col++){
 
             //Test to see if the place in the for loop needs a character; uses the radius as a mid point and then adds/subtracts the row to find the range
 
-            if(c == radius || (c <= radius +i && c >= radius - i)){
+            if(col == radius || (col <= radius +row && col >= radius - row)){
                 cout << "#";
             }else{
                 cout << " ";
@@ -65,5 +67,21 @@ void diamond(int radius){
         }
         cout << endl;
     }
+}
 
+void bottomHalf(int radius) {//Make a row
+    for(int row = radius; row >= 0; row--){
+        //fill the row
+        for(int col = 0; col < radius * 2 +1; col++){
+
+            //Test to see if the place in the for loop needs a character; uses the radius as a mid point and then adds/subtracts the row to find the range
+
+            if(col == radius || (col <= radius +row && col >= radius - row)){
+                cout << "#";
+            }else{
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
 }
