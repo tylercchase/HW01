@@ -1,10 +1,20 @@
 #include <iostream>
+/*
+* Name: Tyler Chase
+* Teacher: John Quan
+* Class: CS201
+* Assignment: HW01 Part B
+* Filename: diamond.cpp
+* Purpose: Print a diamond of a length the user specifies
+* Date: 1/28/2019
+*/
+
 using std::endl;
 using std::cin;
 using std::cout;
 void diamond(int radius);
 
-int getInt(int userInput);
+int getInt();
 
 void bottomHalf(int radius);
 
@@ -12,9 +22,8 @@ void topHalf(int radius);
 
 int main() {
     while(true) {
-        int userInput;
-        //Loops until the user gives a valid input
-        userInput = getInt(userInput);
+        //int userInput;
+        int userInput = getInt();
         if(userInput == 0) {
             break;
         }else {
@@ -24,25 +33,30 @@ int main() {
     return 0;
 }
 
-int getInt(int userInput) {
+int getInt() {
+    int output;
     //Loops until the user enters a valid input; Returns error if non-int input
     while (true) {
 
         cout << "Enter a positive number for the diamond to be in the dimensions of. Enter 0 to end the program" << endl;
-        cin >> userInput;
+        cin >> output;
 
         if(cin.fail()){
-            cout << "Please enter a number" << endl;
+
+            cout << "Please enter a number \n" << endl;
+
             //clears the input and ignores what was entered previously, prevents endless loops
             cin.clear();
+
+            //Ignores until it reaches 999 characters, or until it reaches a new line(end of input)
             cin.ignore(999,'\n');
 
-        } else if (userInput >= 0)
+        } else if (output >= 0)
             break;
         else
             cout << "Please enter a positive number \n" << endl;
     }
-    return userInput;
+    return output;
 }
 
 void diamond(int radius){
@@ -54,29 +68,40 @@ void diamond(int radius){
 
     bottomHalf(radius);
 
+
 }
+
 void fill(int amount){
+
     for(int c=0;c<amount;++c){
-        cout << "#";
+        //Prints out diamond
+            cout << "#";
+
     }
     cout << endl;
 
 }
 
 void topHalf(int radius){
+
     for(int row = 0;row < radius; ++row){
+
         for(int col = 0; col < radius - row; col++){
             cout << " ";
         }
+        //Every row requires two more characters than the previous, starting at 1
         fill(1+row*2);
     }
 }
 
 void bottomHalf(int radius) {
+
     for(int row = radius;row >= 0; --row){
+
         for(int col = 0; col <radius - row; col++){
             cout << " ";
         }
+        //Every row requires two more characters than the previous, starting at 1
         fill(1+row*2);
     }
 }
